@@ -1,5 +1,7 @@
 import {Component, OnInit, EventEmitter} from 'angular2/core';
 
+import {CartoDBService} from "../services/api/cartodb.service";
+
 
 @Component({
   selector: 'type-button',
@@ -12,7 +14,7 @@ export class TypeButtonComponent implements OnInit {
 
   private reportTypes:Array<string>
 
-  constructor() {
+  constructor(private _cartoDBService: CartoDBService) {
   }
 
   ngOnInit() {
@@ -40,11 +42,14 @@ export class TypeButtonComponent implements OnInit {
   selectType(type:string) {
     this.selectedType = type;
     this.showMenu = false;
+    let query = "SELECT * FROM banes_environmental_protection_service_requestsv2 WHERE type IN ('" + this.selectedType + "') AND type IS NOT NULL"
+    this._cartoDBService.updateQuery.emit(query);
   }
 
   // reset
   resetTypes() {
-
+    let query = "SELECT * FROM banes_environmental_protection_service_requestsv2"
+    this._cartoDBService.updateQuery.emit(query);
   }
 
 }
