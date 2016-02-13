@@ -14,29 +14,26 @@ export class MapComponent implements OnInit {
   }
 
   ngOnInit() {
-      console.log("ngOnInit");
 
-    //   this._cartoDBService.getData(new Date(2016, 1, 1), new Date()).map(
-    //       res => res.json()
-    //   ).subscribe(
-    //       data => this.addDataToMap(data)
-    //   );
-
-      this._map = new L.Map('map', {
-        zoomControl: false,
-        center: [43, 0],
-        zoom: 3
-      });
-      console.log(this._cartoDBService.getSQL(new Date(2016, 1, 1), new Date()));
-      cartodb.createLayer(this._map, {
-        user_name: 'philknight',
-        type: 'cartodb',
-        sublayers: [{
-          sql: this._cartoDBService.getSQL(new Date(2016, 1, 1), new Date()),
-          cartocss: '#table_name {marker-fill: #F0F0F0;}'
-        }]
-      })
-      .addTo(this._map)
+      cartodb.createVis('map', 'https://philknight.cartodb.com/api/v2/viz/62dd0b5c-d25d-11e5-a592-0e3ff518bd15/viz.json');
+      // cartodb.createLayer('map', {
+      //   user_name: 'philknight',
+      //   type: 'cartodb',
+      //   sublayers: [{
+      //     sql: "SELECT * FROM banes_environmental_protection_service_requestsv2 WHERE ST_Distance(the_geom, ST_SetSRID(ST_MakePoint(-2.368147, 51.392624),4326), true) < 500",
+      //     cartocss: '#banes_environmental_protection_service_requestsv2 {marker-fill-opacity: 0.9; marker-line-color: blue; marker-line-width: 1; marker-line-opacity: 1; marker-placement: point; marker-type: ellipse; marker-width: 10; marker-fill: #FF6600;marker-allow-overlap: true;}'
+      //   }]
+      // })
+      // .addTo('map');
+      // var sql = new cartodb.SQL({ user: 'philknight' });
+      // sql.execute("SELECT * FROM banes_environmental_protection_service_requestsv2",)
+      //   .done(function(data) {
+      //     console.log(data.rows);
+      //   })
+      //   .error(function(errors) {
+      //     // errors contains a list of errors
+      //     console.log("errors:" + errors);
+      //   })
   }
 
   // addDataToMap(data: any) {

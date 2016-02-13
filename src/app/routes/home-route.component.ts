@@ -20,11 +20,7 @@ import 'rxjs/Rx';
  ]
 })
 export class HomeComponent implements OnInit {
-  public routes = Routes;
-  private accessToken: string;
 
-  /** Observable Events */
-  // keywordSearchObserver = new EventEmitter();
   constructor(
   ) {
   }
