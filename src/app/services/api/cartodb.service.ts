@@ -14,14 +14,16 @@ export class CartoDBService {
 
 	constructor(
         public _router: Router,
-		public _http: Http,
-        public _datePipe: DatePipe
+		public _http: Http
     ) {
 
 	}
 
-  getData(startDate: Date, endDate: Date) {
+  getSQL(startDate: Date, endDate: Date) {
       let APIKEY = "59f08e1c8d3bd54c48b73f4d415d2c4b4286e674";
-      return this._http.get(`https://philknight.cartodb.com/api/v2/sql?api_key=${APIKEY}&q=SELECT * FROM banes_environmental_protection_service_requestsv2 WHERE closeddate BETWEEN '2015-05-17T00:46:40' AND '2015-08-26T07:00:00'`);
+      let dp = new DatePipe();
+      let fmtStartDate = dp.transform(startDate, ["yyyy-MM-dd"]);
+      let fmtEndDate = dp.transform(endDate, ["yyyy-MM-dd"]);
+      return `https://philknight.cartodb.com/api/v2/sql?api_key=${APIKEY}&q=SELECT * FROM banes_environmental_protection_service_requestsv2 WHERE closeddate BETWEEN '${fmtStartDate}' AND '${fmtEndDate}'`;
   }
 }
