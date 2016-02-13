@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en-GB" ng-app="cloudfind">
+  <head>
+    <meta charset="utf-8">
+    <base href="/">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bath: Hacked Loves the Enviroment</title>
+    <!-- Place favicon.ico in the root directory -->
+    <link rel="shortcut icon" href="http://www.bathhacked.org/wp-content/themes/bath-hacked-theme/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="styles/main.css">
+
+    <script src="lib/angular2-polyfills.js"></script>
+    <script src="lib/system.src.js"></script>
+    <script src="lib/Rx.js"></script>
+    <script src="lib/angular2.dev.js"></script>
+    <script src="lib/router.dev.js"></script>
+    <script src="lib/http.dev.js"></script>
+
+    <script>
+      System.config({
+        packages: {
+          app: {
+            format: 'register',
+            defaultExtension: 'js'
+          }
+        }
+      });
+      System.import('app/bootstrap')
+            .then(null, console.error.bind(console));
+    </script>
+  </head>
+  <body>
+    <app>loading...</app>
+  </body>
+</html>
