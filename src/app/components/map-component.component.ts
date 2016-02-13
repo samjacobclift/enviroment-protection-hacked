@@ -13,6 +13,8 @@ export class MapComponent implements OnInit {
   private titleLayerURL:string;
   private baseQuery:string;
   private type:string;
+  private month:string;
+  private year:string;
 
   constructor(private _cartoDBService: CartoDBService) {
   }
@@ -21,6 +23,13 @@ export class MapComponent implements OnInit {
     this.baseQuery = 'SELECT * FROM banes_environmental_protection_service_requestsv2 ';
     this._cartoDBService.setType.subscribe((type: string) => {
       this.setType(type);
+    });
+
+    this._cartoDBService.setMonth.subscribe((date: any) => {
+      this.year = date['currentYear'];
+      this.month = date['currentMonth'];
+      this.setQuery();
+
     });
 
     this.layerURL = 'https://philknight.cartodb.com/api/v2/viz/62dd0b5c-d25d-11e5-a592-0e3ff518bd15/viz.json';
@@ -43,19 +52,41 @@ export class MapComponent implements OnInit {
     this.setQuery();
   }
 
+  setDateRange(month:string, year:string) {
+    this.month = month;
+    this.year = year;
+
+    this.setQuery();
+  }
+
   setQuery() {
     let query = this.baseQuery;
 
-    if (this.type) {
-        query += "WHERE type IN ('" + this.type + "') AND type IS NOT NULL";
+    if (this.type || this.year) {
+      query += " WHERE ";
     }
-    console.log(query);
+
+    if (this.type) {
+      query += " type IN ('" + this.type + "') AND type IS NOT NULL ";
+    }
+
+    if (this.year) {
+      // 2015-07 '))
+      if (this.type) {
+        query += " AND "
+      }
+      let dateFilter = this.year + '-' + ("0" + this.month).slice(-2);
+      query += " receiveddate >= '" + dateFilter + "-01T00:00:00+00:00' AND receiveddate <= '" + dateFilter + "-31T23:59:59+01:00'";
+    }
+
 
     this._map.eachLayer((layer:any) => {
       if (layer['_url'] != this.titleLayerURL) {
         this._map.removeLayer(layer);
       }
     })
+
+    console.log(query);
 
     // change the query for the first layer
     let subLayerOptions = {

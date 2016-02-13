@@ -1,7 +1,8 @@
 <div class="date_range_component">
+  {{ currentDateSearchParams }}
 <nav>
   <ul class="pagination pagination_items">
-    <li><a href="#">Prev Month</a></li>
+    <li><a href="#" (click)="previousMonth()">Prev Month</a></li>
     <li><a href="#">Next Month</a></li>
     <li><a href="#">Reset</a></li>
   </ul>

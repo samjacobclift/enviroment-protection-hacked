@@ -11,6 +11,6 @@ import 'rxjs/Rx';
 @Injectable()
 export class CartoDBService {
 	setType = new EventEmitter();
-	setDateRange = new EventEmitter();
+	setMonth = new EventEmitter();
 
 }
