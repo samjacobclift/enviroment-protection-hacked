@@ -18,13 +18,13 @@ export class TypeButtonComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.selectedType = 'Select One';
+    this.selectedType = 'All';
     this.showMenu = false;
     // load the report types
     this.reportTypes = [
       'Noise complaint',
       'Light pollution',
-      'Accumulations (including refuse & litter)',
+      'Accumulations (including refuse & litter',
       'Nuisance (excluding noise & pollution)',
       'Drainage Complaint',
       'Odour/Fumes',
@@ -42,14 +42,14 @@ export class TypeButtonComponent implements OnInit {
   selectType(type:string) {
     this.selectedType = type;
     this.showMenu = false;
-    let query = "SELECT * FROM banes_environmental_protection_service_requestsv2 WHERE type IN ('" + this.selectedType + "') AND type IS NOT NULL"
-    this._cartoDBService.updateQuery.emit(query);
+    this._cartoDBService.setType.emit(this.selectedType);
   }
 
   // reset
   resetTypes() {
-    let query = "SELECT * FROM banes_environmental_protection_service_requestsv2"
-    this._cartoDBService.updateQuery.emit(query);
+    this.selectedType = 'All';
+    this.showMenu = false;
+    this._cartoDBService.setType.emit(null);
   }
 
 }
