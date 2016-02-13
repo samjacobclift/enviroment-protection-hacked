@@ -15,31 +15,33 @@ export class MapComponent implements OnInit {
 
   ngOnInit() {
 
-      cartodb.createVis('map', 'https://philknight.cartodb.com/api/v2/viz/62dd0b5c-d25d-11e5-a592-0e3ff518bd15/viz.json');
-      // cartodb.createLayer('map', {
-      //   user_name: 'philknight',
-      //   type: 'cartodb',
-      //   sublayers: [{
-      //     sql: "SELECT * FROM banes_environmental_protection_service_requestsv2 WHERE ST_Distance(the_geom, ST_SetSRID(ST_MakePoint(-2.368147, 51.392624),4326), true) < 500",
-      //     cartocss: '#banes_environmental_protection_service_requestsv2 {marker-fill-opacity: 0.9; marker-line-color: blue; marker-line-width: 1; marker-line-opacity: 1; marker-placement: point; marker-type: ellipse; marker-width: 10; marker-fill: #FF6600;marker-allow-overlap: true;}'
-      //   }]
-      // })
-      // .addTo('map');
-      // var sql = new cartodb.SQL({ user: 'philknight' });
-      // sql.execute("SELECT * FROM banes_environmental_protection_service_requestsv2",)
-      //   .done(function(data) {
-      //     console.log(data.rows);
-      //   })
-      //   .error(function(errors) {
-      //     // errors contains a list of errors
-      //     console.log("errors:" + errors);
-      //   })
+        // initiate leaflet map
+        map = new L.Map('map_canvas', {
+          center: [51.381481, -2.3586],
+          zoom: 12
+        })
+
+        L.tileLayer('https://dnv9my2eseobd.cloudfront.net/v3/cartodb.map-4xtxp73f/{z}/{x}/{y}.png', {
+          attribution: 'Mapbox <a href="http://mapbox.com/about/maps" target="_blank">Terms &amp; Feedback</a>'
+        }).addTo(map);
+
+        var layerUrl = 'https://philknight.cartodb.com/api/v2/viz/62dd0b5c-d25d-11e5-a592-0e3ff518bd15/viz.json';
+
+        // change the query for the first layer
+        var subLayerOptions = {
+          sql: "SELECT * FROM banes_environmental_protection_service_requestsv2",
+          cartocss: "#banes_environmental_protection_service_requestsv2{marker-fill: #109DCD; marker-width: 5; marker-line-color: white; marker-line-width: 0;}"
+        }
+
+        cartodb.createLayer(map, layerUrl)
+          .addTo(map)
+          .on('done', function(layer) {
+            layer.getSubLayer(0).set(subLayerOptions);
+          }).on('error', function() {
+            //log the error
+          });
+
   }
 
-  // addDataToMap(data: any) {
-  //     data.rows.forEach((row: any) => {
-  //
-  //     });
-  // }
 
 }
