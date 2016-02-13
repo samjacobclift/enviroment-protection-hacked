@@ -1,52 +1,9 @@
-// Base Less for all static content
-// Add imports and styles here only if they're needed by everything
-
-// @base-url: "../node_modules/";
-
-// Core variables and mixins
-@import "../../node_modules/bootstrap/less/variables";
-@import "../../node_modules/bootstrap/less/mixins";
-
-// Reset and dependencies
-@import "../../node_modules/bootstrap/less/normalize";
-@import "../../node_modules/bootstrap/less/print";
-//@import "bootstrap/less/glyphicons";
-
-// Core CSS
-@import "../../node_modules/bootstrap/less/scaffolding";
-@import "../../node_modules/bootstrap/less/type";
-@import "../../node_modules/bootstrap/less/code";
-@import "../../node_modules/bootstrap/less/grid";
-//@import "bootstrap/less/tables";
-@import "../../node_modules/bootstrap/less/forms";
-@import "../../node_modules/bootstrap/less/buttons";
-
-// Components
-@import "../../node_modules/bootstrap/less/jumbotron";
-@import "../../node_modules/bootstrap/less/dropdowns";
-@import "../../node_modules/bootstrap/less/button-groups";
-@import "../../node_modules/bootstrap/less/navs";
-@import "../../node_modules/bootstrap/less/navbar";
-
-// Utility classes
-@import "../../node_modules/bootstrap/less/utilities";
-@import "../../node_modules/bootstrap/less/responsive-utilities";
+// Import Bootstrap
+@import "../../node_modules/bootstrap/less/bootstrap";
 
 
-// Because we don't import component-animations, we need:
-.collapse {
-  display: none;
-}
-
-.icon() {
-    display: inline-block;
-    content: "";
-    background-repeat: no-repeat;
-}
-
-.a_wrap:hover,
-.a_wrap:focus {
-  // TODO: this is wiggling on focus
-  display: inline-block;
-  text-decoration: none;
+.date_range_component {
+  .pagination_items {
+    margin: 0px;
+  }
 }
