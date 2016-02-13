@@ -5,7 +5,13 @@ import {AppComponent} from './app.component';
 
 // Service injections
 import {ApiService} from './services/api/api.service';
+import {CartoDBService} from './services/api/cartodb.service';
 import {PostMessageService} from './services/events/post-message.service';
 
-bootstrap(AppComponent, [ROUTER_PROVIDERS, HTTP_PROVIDERS,
-                         ApiService, PostMessageService]);
+bootstrap(AppComponent, [
+    ROUTER_PROVIDERS,
+    HTTP_PROVIDERS,
+    ApiService,
+    CartoDBService,
+    PostMessageService
+]);
