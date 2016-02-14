@@ -15,6 +15,7 @@ export class MapComponent implements OnInit {
   private type:string;
   private month:string;
   private year:string;
+  private timePeriod: Date = new Date();
 
   constructor(private _cartoDBService: CartoDBService) {
   }
@@ -28,6 +29,13 @@ export class MapComponent implements OnInit {
     this._cartoDBService.setDate.subscribe((date: any) => {
       this.year = date['currentYear'];
       this.month = date['currentMonth'];
+
+      if(!this.year || !this.month) {
+          this.timePeriod = new Date();
+      } else {
+          this.timePeriod = new Date(this.year, this.month - 1, 1);
+      }
+
       this.setQuery();
     });
 
