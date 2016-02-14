@@ -13,6 +13,7 @@ export class DataTableComponent implements OnInit {
     private month: number;
     private type: string;
     public rows: Array<any>;
+    public allRows: Array<any> = [];
 
   constructor(private _cartoDBService: CartoDBService) {
   }
@@ -31,30 +32,67 @@ export class DataTableComponent implements OnInit {
   }
 
   refreshDataTable() {
-      let sql = this._cartoDBService.getSQL(this.type, this.year, this.month)
-      this._cartoDBService.getSQLResult(sql).map(
-          data => data.json()
-      ).subscribe(
-          data =>  this.rows = this.groupData(data.rows)
-      )
+      let allRowsPromise = new Promise((resolve, reject) => {
+          console.log("XXXX");
+          let sql = this._cartoDBService.getSQL(null, null, null);
+
+          this._cartoDBService.getSQLResult(sql).map(
+              data => data.json()
+          ).subscribe(
+              data =>  resolve(this.groupData(data.rows, false))
+          )
+      });
+
+      if(this.allRows.length === 0) {
+          allRowsPromise.then((data) => {
+              this.allRows = data;
+
+              let sql = this._cartoDBService.getSQL(this.type, this.year, this.month)
+              this._cartoDBService.getSQLResult(sql).map(
+                  data => data.json()
+              ).subscribe(
+                  data => this.rows = this.formatGroup(this.groupData(data.rows))
+              )
+          });
+      } else {
+          let sql = this._cartoDBService.getSQL(this.type, this.year, this.month)
+          this._cartoDBService.getSQLResult(sql).map(
+              data => data.json()
+          ).subscribe(
+              data => this.rows = this.formatGroup(this.groupData(data.rows))
+          )
+      }
   }
 
   groupData(rows: Array<any>) : Array<any> {
       let result = {};
 
       rows.forEach((row) => {
-          if(!result[row.status]) {
-              result[row.status] = 0;
+          console.log(row.type);
+          if(!result[row.type]) {
+              result[row.type] = 0;
           }
 
-          result[row.status] += 1;
-      })
+          result[row.type] += 1;
+      });
 
-      return Object.keys(result).map(function(k) {
-          return {
+      return result;
+  }
+
+  formatGroup(rows: Array<any>) : Array<any> {
+      return Object.keys(rows).map((k) => {
+          let avg = this.allRows[k] / 13;
+          let res = {
               "name": k,
-              "value": result[k]
+              "value": rows[k],
+              "alltime": this.allRows[k],
+              "avg": Math.round(avg, 0),
+              "againstavg": -Math.round((((avg - rows[k]) / avg) * 100))
           }
+
+          return res;
+      }).sort(function(a, b) {
+          return b.name.length - a.name.length;
       });
   }
 }

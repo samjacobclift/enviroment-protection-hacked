@@ -1,6 +1,18 @@
-<table>
-    <tr *ngFor="#row of rows">
-        <td width="25%">{{row.name}}</td>
-        <td width="25%">{{row.value}}</td>
-    </tr>
+<table class="table table-striped">
+    <thead>
+        <th>Complaint Type</th>
+        <th>Number this month</th>
+        <!-- <th>All time</th> -->
+        <!-- <th>Average</th> -->
+        <th>Against Average</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="#row of rows">
+            <td width="20%">{{row.name}}</td>
+            <td width="20%">{{row.value}}</td>
+            <!-- <td width="20%">{{row.alltime}}</td> -->
+            <!-- <td width="20%">{{row.avg}}</td> -->
+            <td width="20%" [class.danger]="row.againstavg > 0" [class.success]="row.againstavg < 0">{{row.againstavg}}%</td>
+        </tr>
+    </tbody>
 </table>
