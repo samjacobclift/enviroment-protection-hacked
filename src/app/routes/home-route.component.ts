@@ -115,7 +115,7 @@ export class HomeComponent implements OnInit {
   extractSearchParams() {
     let searchParams = {}
     if (this._routeParams.get('type')) {
-      this.typeParam = REPORT_LOOKUP[this._routeParams.get('type')];
+      this.typeParam = REPORT_LOOKUP[decodeURIComponent(this._routeParams.get('type'))];
       searchParams['type'] = this.typeParam;
     }
 

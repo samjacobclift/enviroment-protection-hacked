@@ -21,8 +21,12 @@ export class TypeButtonComponent implements OnInit {
     this.selectedType = 'All';
 
     this._cartoDBService.setSearch.subscribe((data: string) => {
-      this.selectedType = data['type'];
+      console.log('setting type in btn comp ', data)
+      if (data['type']) {
+        this.selectedType = data['type'];
+      }
     });
+
 
     this.showMenu = false;
     // load the report types

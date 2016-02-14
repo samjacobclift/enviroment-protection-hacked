@@ -29,6 +29,13 @@ export class DataTableComponent implements OnInit {
           this.month = data.currentMonth;
           this.refreshDataTable();
       });
+
+      this._cartoDBService.setSearch.subscribe((data: any) => {
+        this.year = data['currentYear'];
+        this.month = data['currentMonth'];
+        this.type = data['type'];
+        this.refreshDataTable();
+      });
   }
 
   refreshDataTable() {
@@ -68,7 +75,6 @@ export class DataTableComponent implements OnInit {
       let result = {};
 
       rows.forEach((row) => {
-          console.log(row.type);
           if(!result[row.type]) {
               result[row.type] = 0;
           }
