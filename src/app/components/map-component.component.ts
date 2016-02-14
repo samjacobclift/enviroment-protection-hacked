@@ -70,7 +70,7 @@ export class MapComponent implements OnInit {
     // change the query for the first layer
     let subLayerOptions = {
       sql: query,
-      cartocss: "#banes_environmental_protection_service_requestsv2{marker-fill: #109DCD; marker-width: 5; marker-line-color: white; marker-line-width: 0;}"
+      cartocss: '#banes_environmental_protection_service_requestsv2{marker-fill-opacity:.9;marker-line-color:#FFF;marker-line-width:1;marker-line-opacity:1;marker-placement:point;marker-type:ellipse;marker-width:10;marker-allow-overlap:true}#banes_environmental_protection_service_requestsv2[type=""]{marker-fill:#7f3f98}#banes_environmental_protection_service_requestsv2[type="Accumulations (including refuse & litter"]{marker-fill:#fff56d}#banes_environmental_protection_service_requestsv2[type=Bonfires]{marker-fill:#ee2b74}#banes_environmental_protection_service_requestsv2[type="Drainage Complaint"]{marker-fill:#00a4e4}#banes_environmental_protection_service_requestsv2[type="General (non-noise) complaint"]{marker-fill:#ee3124}#banes_environmental_protection_service_requestsv2[type="Light pollution"]{marker-fill:#D9DA55}#banes_environmental_protection_service_requestsv2[type="Noise complaint"]{marker-fill:#97CE8B}#banes_environmental_protection_service_requestsv2[type="Nuisance (excluding noise & pollution)"]{marker-fill:#EABFDA}#banes_environmental_protection_service_requestsv2[type="Odour/Fumes"]{marker-fill:#F47D30}#banes_environmental_protection_service_requestsv2[type="Rat Complaint"]{marker-fill:#6A3D9A}'
     }
     cartodb.createLayer(this._map, this.layerURL)
      .addTo(this._map)
