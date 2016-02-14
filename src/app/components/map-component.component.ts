@@ -21,12 +21,20 @@ export class MapComponent implements OnInit {
 
   ngOnInit() {
     this._cartoDBService.setType.subscribe((type: string) => {
-      this.setType(type);
+      this.type = type;
+      this.setQuery();
     });
 
-    this._cartoDBService.setMonth.subscribe((date: any) => {
+    this._cartoDBService.setDate.subscribe((date: any) => {
       this.year = date['currentYear'];
       this.month = date['currentMonth'];
+      this.setQuery();
+    });
+
+    this._cartoDBService.setSearch.subscribe((data: any) => {
+      this.year = data['currentYear'];
+      this.month = data['currentMonth'];
+      this.type = data['type'];
       this.setQuery();
     });
 
@@ -42,18 +50,11 @@ export class MapComponent implements OnInit {
       attribution: 'Mapbox <a href="http://mapbox.com/about/maps" target="_blank">Terms &amp; Feedback</a>'
     }).addTo(this._map);
 
-    this.setQuery();
-  }
-
-  setType(typeToQuery:string) {
-    this.type = typeToQuery;
-    this._cartoDBService.setQuery();
   }
 
   setDateRange(month:string, year:string) {
     this.month = month;
     this.year = year;
-
     this.setQuery();
   }
 
@@ -71,7 +72,6 @@ export class MapComponent implements OnInit {
       sql: query,
       cartocss: "#banes_environmental_protection_service_requestsv2{marker-fill: #109DCD; marker-width: 5; marker-line-color: white; marker-line-width: 0;}"
     }
-
     cartodb.createLayer(this._map, this.layerURL)
      .addTo(this._map)
      .on('done', function(layer: any) {

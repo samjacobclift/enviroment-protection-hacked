@@ -8,10 +8,10 @@
     </button>
     <ul class="dropdown-menu report_menu" *ngIf="showMenu">
       <li *ngFor="#type of reportTypes">
-        <a href="#" (click)="selectType(type)">{{ type }}</a>
+        <a (click)="selectType(type)">{{ type }}</a>
       </li>
       <li role="separator" class="divider"></li>
-      <li><a href="#" (click)="resetTypes()">Reset</a></li>
+      <li><a (click)="resetTypes()">Reset</a></li>
     </ul>
   </div>
 </div>

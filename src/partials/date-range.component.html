@@ -2,9 +2,9 @@
   <div class="row">
     <nav>
       <ul class="pager pagination_items">
-        <li><a href="#" (click)="filterPreviousMonth()">{{ lastMonth | date:"MMM/yyyy" }}</a></li>
-        <li><a href="#" class="hidden-xs" (click)="reset()">Clear</a></li>
-        <li><a href="#" (click)="filterNextMonth()">{{ nextMonth | date:"MMM/yyyy" }}</a></li>
+        <li><a (click)="filterPreviousMonth()">{{ lastMonth | date:"MMM/yyyy" }}</a></li>
+        <li><a class="hidden-xs" (click)="reset()">Clear</a></li>
+        <li><a (click)="filterNextMonth()">{{ nextMonth | date:"MMM/yyyy" }}</a></li>
       </ul>
     </nav>
   </div>

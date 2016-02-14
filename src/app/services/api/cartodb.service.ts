@@ -11,7 +11,8 @@ import 'rxjs/Rx';
 @Injectable()
 export class CartoDBService {
 	setType = new EventEmitter();
-	setMonth = new EventEmitter();
+	setDate = new EventEmitter();
+	setSearch = new EventEmitter();
 	queryUpdated = new EventEmitter();
 	baseQuery = 'SELECT * FROM banes_environmental_protection_service_requestsv2 ';
 
