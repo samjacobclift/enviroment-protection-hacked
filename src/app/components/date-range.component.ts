@@ -26,6 +26,18 @@ export class DateRangeComponent implements OnInit {
     // set to no filter when page loads
     this.filterActive = false;
 
+    this._cartoDBService.setSearch.subscribe((data: string) => {
+      if (data['currentYear']) {
+        this.currentViewDate.setMonth(data['currentMonth'] - 1);
+        this.currentViewDate.setFullYear(data['currentYear']);
+        this.setDateSearchString();
+
+      } else {
+        console.log('skipping search')
+      }
+
+    });
+
   }
 
   setDateSearchString() {

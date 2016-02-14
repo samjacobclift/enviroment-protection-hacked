@@ -11,6 +11,37 @@ import {CartoDBService} from "../services/api/cartodb.service";
 
 import 'rxjs/Rx';
 
+const MONTH_LOOKUP = {
+  'jan': '1',
+  'feb': '2',
+  'march': '3',
+  'april': '4',
+  'may': '5',
+  'june': '6',
+  'july': '7',
+  'august': '8',
+  'september': '9',
+  'october': '10',
+  'november': '11',
+  'december': '12'
+}
+
+const REVERSE_MONTH_LOOKUP = {
+  '1': 'jan',
+  '2': 'feb',
+  '3': 'march',
+  '4': 'april',
+  '5': 'may',
+  '6': 'june',
+  '7': 'july',
+  '8': 'august',
+  '9': 'september',
+  '10': 'october',
+  '11': 'november',
+  '12': 'december'
+}
+
+
 const REPORT_LOOKUP = {
   'noise_complaint': 'Noise complaint',
   'light_pollution': 'Light pollution',
@@ -89,19 +120,16 @@ export class HomeComponent implements OnInit {
     }
 
     if (this._routeParams.get('month')) {
-      this.monthParam = this._routeParams.get('month');
-      searchParams['month'] = this.monthParam;
+      this.monthParam = MONTH_LOOKUP[this._routeParams.get('month')];
+      searchParams['currentMonth'] = this.monthParam;
     }
 
     if (this._routeParams.get('year')) {
       this.yearParam = this._routeParams.get('year');
-      searchParams['year'] = this.yearParam;
+      searchParams['currentYear'] = this.yearParam;
     }
     // set search params
     setTimeout(() => {
-      console.log('emitting')
-      console.log(searchParams)
-      console.log(this._cartoDBService.setSearch.emit)
       this._cartoDBService.setSearch.emit(searchParams);
     }, 500)
   }
@@ -116,7 +144,7 @@ export class HomeComponent implements OnInit {
 
     if (this.yearParam && this.monthParam) {
       queryString = queryString + 'year=' + this.yearParam;
-      queryString = queryString + '&month=' + this.monthParam;
+      queryString = queryString + '&month=' + REVERSE_MONTH_LOOKUP[this.monthParam];
     }
 
     if (this.typeParam) {
