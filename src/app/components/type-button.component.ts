@@ -33,8 +33,8 @@ export class TypeButtonComponent implements OnInit {
     this.reportTypes = [
       'Noise complaint',
       'Light pollution',
-      'Accumulations (including refuse & litter',
-      'Nuisance (excluding noise & pollution)',
+    //   'Accumulations (including refuse & litter',
+    //   'Nuisance (excluding noise & pollution)',
       'Drainage Complaint',
       'Odour/Fumes',
       'Bonfires',

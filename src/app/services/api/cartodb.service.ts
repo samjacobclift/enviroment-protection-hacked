@@ -22,6 +22,7 @@ export class CartoDBService {
 
 	getSQL(type: string, year: string, month: string) : string {
 		if(type) {
+			type = type.replace("&", "\&");
 			type = type.replace("(", "\(");
 			type = type.replace("\)", ")");
 		}
@@ -32,7 +33,7 @@ export class CartoDBService {
 	    }
 
 	    if (type) {
-	      query += ` type = '${type}'`;
+	      query += ` "type" = '${type}'`;
 	    }
 
 	    if (year) {
