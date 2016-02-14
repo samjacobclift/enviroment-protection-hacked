@@ -1,15 +1,17 @@
-<div class="btn-group"
-     [ngClass]="{open: showMenu}">
-  <button type="button"
-          (click)="toggleMenu()"
-          class="btn btn-default dropdown-toggle">
-    {{ selectedType }} <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu" *ngIf="showMenu">
-    <li *ngFor="#type of reportTypes">
-      <a href="#" (click)="selectType(type)">{{ type }}</a>
-    </li>
-    <li role="separator" class="divider"></li>
-    <li><a href="#" (click)="resetTypes()">Reset</a></li>
-  </ul>
+<div class="dropup">
+  <div class="btn-group"
+       [ngClass]="{open: showMenu}">
+    <button type="button"
+            (click)="toggleMenu()"
+            class="btn btn-default dropdown-toggle">
+      {{ selectedType }} <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu report_menu" *ngIf="showMenu">
+      <li *ngFor="#type of reportTypes">
+        <a href="#" (click)="selectType(type)">{{ type }}</a>
+      </li>
+      <li role="separator" class="divider"></li>
+      <li><a href="#" (click)="resetTypes()">Reset</a></li>
+    </ul>
+  </div>
 </div>
