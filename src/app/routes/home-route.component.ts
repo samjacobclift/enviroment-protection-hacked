@@ -136,10 +136,10 @@ export class HomeComponent implements OnInit {
 
   /** Set state params */
   setSearchParams() {
-    let queryString = '';
+    let queryString = '/app';
 
     if (this.yearParam || this.typeParam) {
-      queryString = '/?'
+      queryString = '/app?'
     }
 
     if (this.yearParam && this.monthParam) {
