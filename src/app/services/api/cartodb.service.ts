@@ -40,12 +40,6 @@ export class CartoDBService {
 		  dateFilter.setMonth(month);
 		  dateFilter.setDate(1);
 
-		//   if (dateFilter.getMonth() == 11) {
-		//       var current = new Date(dateFilter.getFullYear() + 1, 0, 1);
-		//   } else {
-		//       var current = new Date(dateFilter.getFullYear(), dateFilter.getMonth() + 1, 1);
-		//   }
-
 		  let startDate = dateFilter.getFullYear() + "-" + this.padMonth(dateFilter.getMonth() + 1);
 		  dateFilter.setMonth(dateFilter.getMonth() + 1);
 		  let endDate = dateFilter.getFullYear() + "-" + this.padMonth(dateFilter.getMonth() + 1);
