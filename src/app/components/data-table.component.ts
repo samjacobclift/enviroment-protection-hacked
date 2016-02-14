@@ -40,12 +40,21 @@ export class DataTableComponent implements OnInit {
   }
 
   groupData(rows: Array<any>) : Array<any> {
-      let types: Array<string> = [];
+      let result = {};
 
       rows.forEach((row) => {
+          if(!result[row.status]) {
+              result[row.status] = 0;
+          }
 
+          result[row.status] += 1;
       })
 
-      return [];
+      return Object.keys(result).map(function(k) {
+          return {
+              "name": k,
+              "value": result[k]
+          }
+      });
   }
 }
