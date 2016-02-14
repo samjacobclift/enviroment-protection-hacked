@@ -19,6 +19,11 @@ export class TypeButtonComponent implements OnInit {
 
   ngOnInit() {
     this.selectedType = 'All';
+
+    this._cartoDBService.setSearch.subscribe((data: string) => {
+      this.selectedType = data['type'];
+    });
+
     this.showMenu = false;
     // load the report types
     this.reportTypes = [

@@ -49,7 +49,7 @@ export class DateRangeComponent implements OnInit {
 
     this.setDateSearchString();
 
-    this._cartoDBService.setMonth.emit({'currentYear': '',
+    this._cartoDBService.setDate.emit({'currentYear': '',
                                         'currentMonth': ''});
     // set to no filter when page loads
     this.filterActive = false;
@@ -68,7 +68,7 @@ export class DateRangeComponent implements OnInit {
 
     this.setDateSearchString();
 
-    this._cartoDBService.setMonth.emit({'currentYear':currentYear,
+    this._cartoDBService.setDate.emit({'currentYear':currentYear,
                                         'currentMonth': currentMonth});
 
     this.filterActive = true;
@@ -86,7 +86,7 @@ export class DateRangeComponent implements OnInit {
 
     this.setDateSearchString();
 
-    this._cartoDBService.setMonth.emit({'currentYear':currentYear,
+    this._cartoDBService.setDate.emit({'currentYear':currentYear,
                                         'currentMonth': currentMonth});
 
     this.filterActive = true;

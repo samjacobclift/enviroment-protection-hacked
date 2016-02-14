@@ -23,7 +23,7 @@ export class DataTableComponent implements OnInit {
           this.refreshDataTable();
       });
 
-      this._cartoDBService.setMonth.subscribe((data: any) => {
+      this._cartoDBService.setDate.subscribe((data: any) => {
           this.year = data.currentYear;
           this.month = data.currentMonth;
           this.refreshDataTable();
