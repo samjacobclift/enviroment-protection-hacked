@@ -30,7 +30,8 @@ export class TypeButtonComponent implements OnInit {
       'Odour/Fumes',
       'Bonfires',
       'General (non-noise) complaint',
-      'Rat Complaint'
+      'Rat Complaint',
+      'Community Trigger'
     ]
   }
 
